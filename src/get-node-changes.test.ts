@@ -1,4 +1,4 @@
-import { INode } from "babylonjs-gltf2interface";
+import {INode} from "babylonjs-gltf2interface";
 import {getNodeChanges, ChangeType} from './get-node-changes';
 
 describe('getNodesChanges', () => {
@@ -108,6 +108,30 @@ describe('getNodesChanges', () => {
           mesh: 1,
         }
       }
-    ])
+    ]);
+  });
+
+  test('does not compare extensions', () => {
+    const nodeWithExtension1: INode = {
+      ...node1,
+      extensions: {
+        fancy_thing: 1,
+      },
+    };
+    const nodeWithExtension2: INode = {
+      ...node1,
+      extensions: {
+        not_fancy_thing: 1,
+      },
+    };
+
+    const changes = getNodeChanges([nodeWithExtension1], [nodeWithExtension2]);
+
+    expect(changes).toEqual([
+      {
+        type: ChangeType.EQUAL,
+        node: node1,
+      }
+    ]);
   });
 });

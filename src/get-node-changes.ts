@@ -33,11 +33,18 @@ export type Change = {
   node: INode,
 };
 
+function removeExtension(node: INode): INode {
+  return {
+    ...node,
+    extensions: undefined,
+  };
+}
+
 export function getNodeChanges(left: INode[], right: INode[]): Change[] {
   const changes: Change[] = [];
 
-  left = clone(left);
-  right = clone(right);
+  left = clone(left).map(removeExtension);
+  right = clone(right).map(removeExtension);
 
   left.forEach((leftNode) => {
     const result = findMatchingNode(leftNode, right);
