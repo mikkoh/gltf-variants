@@ -3,7 +3,7 @@ import areSameNode from './are-same-node';
 
 type NodeMatch = {
   index: number,
-  match: INode | null,
+  match: INode,
 };
 
 export default function findNode(node: INode, list: INode[]): NodeMatch | null {
