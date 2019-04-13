@@ -1,4 +1,5 @@
 import {INode} from 'babylonjs-gltf2interface';
+import INodeWithVariantExtension from './inode-with-variant-extension';
 import createNodesWithVariants from './create-nodes-with-variants';
 
 describe('createNodesWithVariants', () => {
@@ -17,6 +18,16 @@ describe('createNodesWithVariants', () => {
   const largeNode: INode = {
     name: nameLarge,
     mesh: 2,
+  };
+  const redNodeWithVariants: INodeWithVariantExtension = {
+    ...redNode,
+    extensions: {
+      SHOPIFY_variant: [
+        {
+          tags: [tagRed]
+        }
+      ]
+    }
   };
 
   test('handles tagging existing node', () => {
