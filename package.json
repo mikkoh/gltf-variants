@@ -1,0 +1,28 @@
+{
+  "name": "gltf-variant-generator",
+  "version": "1.0.0",
+  "description": "Will diff GLTF models to create GLTF variants",
+  "main": "./lib/main.js",
+  "types": "./lib/main.d.ts",
+  "repository": "SOON",
+  "author": {
+    "name": "Mikko Haapoja",
+    "email": "me@mikkoh.com",
+    "url": "https://github.com/mikkoh"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.3"
+  },
+  "scripts": {
+    "test": "jest",
+    "dev": "jest --watch"
+  },
+  "dependencies": {
+    "babylonjs-gltf2interface": "^3.3.0",
+    "changeset": "^0.2.4"
+  }
+}
