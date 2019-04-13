@@ -28,7 +28,7 @@ interface IChangeData {
   name: string,
 };
 
-type Change = {
+export type Change = {
   type: ChangeType,
   node: INode,
 };
