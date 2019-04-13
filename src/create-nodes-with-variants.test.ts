@@ -7,28 +7,35 @@ describe('createNodesWithVariants', () => {
   const tagSmall = 'smallTag';
   const nameLarge = 'largeNode';
 
-  const smallNode: INode = {
-    name: nameSmall,
-    mesh: 0,
-  };
-  const smallNodeDiff: INode = {
-    name: nameSmall,
-    mesh: 1,
-  };
-  const largeNode: INode = {
-    name: nameLarge,
-    mesh: 2,
-  };
-  const redNodeWithVariants: INodeWithVariantExtension = {
-    ...redNode,
-    extensions: {
-      SHOPIFY_variant: [
-        {
-          tags: [tagRed]
-        }
-      ]
-    }
-  };
+  let smallNode: INode;
+  let smallNodeDiff: INode;
+  let largeNode: INode;
+  let smallNodeWithVariants: INodeWithVariantExtension;
+
+  beforeEach(() => {
+    smallNode = {
+      name: nameSmall,
+      mesh: 0,
+    };
+    smallNodeDiff = {
+      name: nameSmall,
+      mesh: 1,
+    };
+    largeNode = {
+      name: nameLarge,
+      mesh: 2,
+    };
+    smallNodeWithVariants = {
+      ...smallNode,
+      extensions: {
+        SHOPIFY_variant: [
+          {
+            tags: [tagSmall]
+          }
+        ]
+      }
+    };
+  });
 
   test('handles tagging existing node', () => {
     const tags = [tagSmall];
@@ -36,8 +43,7 @@ describe('createNodesWithVariants', () => {
 
     expect(newNodes).toEqual([
       {
-        name: nameSmall,
-        mesh: smallNode.mesh,
+        ...smallNode,
         extensions: {
           SHOPIFY_variant: [
             {
@@ -74,8 +80,7 @@ describe('createNodesWithVariants', () => {
     expect(newNodes).toHaveLength(2);
     expect(newNodes).toEqual([
       {
-        name: nameSmall,
-        mesh: smallNode.mesh,
+        ...smallNode,
         extensions: {
           SHOPIFY_variant: [
             {
@@ -97,14 +102,13 @@ describe('createNodesWithVariants', () => {
     ]);
   });
 
-  test('handles variant diff', () => {
+  test('handles variant diff when same node with changes', () => {
     const tags = [tagSmall];
     const newNodes = createNodesWithVariants(tags, [smallNode], [smallNodeDiff]);
 
     expect(newNodes).toEqual([
       {
-        name: nameSmall,
-        mesh: smallNode.mesh,
+        ...smallNode,
         extensions: {
           SHOPIFY_variant: [
             {
@@ -114,6 +118,47 @@ describe('createNodesWithVariants', () => {
           ],
         }
       },
+    ]);
+  });
+
+  test('handles appending tags when same and has variants already', () => {
+    const newTagName = 'another-tag';
+    const tags = [newTagName];
+    const newNodes = createNodesWithVariants(tags, [smallNodeWithVariants], [smallNode]);
+
+    expect(newNodes).toEqual([
+      {
+        ...smallNode,
+        extensions: {
+          SHOPIFY_variant: [
+            {
+              tags: [tagSmall, newTagName],
+            }
+          ]
+        }
+      }
+    ]);
+  });
+
+  test('handles appending variant', () => {
+    const tags = ['small', 'sleeveless'];
+    const newNodes = createNodesWithVariants(tags, [smallNodeWithVariants], [smallNodeDiff]);
+
+    expect(newNodes).toEqual([
+      {
+        ...smallNode,
+        extensions: {
+          SHOPIFY_variant: [
+            {
+              tags: [tagSmall],
+            },
+            {
+              tags,
+              mesh: smallNodeDiff.mesh,
+            }
+          ]
+        }
+      }
     ]);
   });
 });

@@ -1,6 +1,10 @@
 import {INode} from 'babylonjs-gltf2interface';
+import clone from './clone';
 import INodeWithVariantExtension, {ITaggedNode} from './inode-with-variant-extension';
 import {getNodeChanges, ChangeType, Change} from './get-node-changes';
+import getVariantExtension from './get-variant-extension';
+import setVariantExtension from './set-variant-extension';
+import compactVariants from './compact-variants';
 
 function createLeftNode(tags: string[], node: INode, change: Change): INodeWithVariantExtension {
   let variant: ITaggedNode = {
@@ -9,19 +13,17 @@ function createLeftNode(tags: string[], node: INode, change: Change): INodeWithV
 
   if (change.type === ChangeType.DIFF) {
     variant = {
-      ...variant,
+      tags,
       ...change.node,
     };
   }
 
-  return {
-    ...node,
-    extensions: {
-      SHOPIFY_variant: [
-        variant,
-      ],
-    },
-  };
+  const newNode = clone(node);
+  const variants = getVariantExtension(newNode);
+
+  variants.push(variant);
+
+  return newNode;
 }
 
 function createRightNode(tags: string[], rightNode: INode): INodeWithVariantExtension {
@@ -59,6 +61,12 @@ export default function createNodesWithVariants(tags: string[], leftNodes: INode
     nodes.push(
       createRightNode(tags, change.node),
     );
+  }
+
+  for (let i = 0; i < leftNodes.length; i++) {
+    const variants = getVariantExtension(nodes[i]);
+    
+    setVariantExtension(nodes[i], compactVariants(variants));
   }
 
   return nodes;
