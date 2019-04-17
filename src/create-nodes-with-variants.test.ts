@@ -161,4 +161,33 @@ describe('createNodesWithVariants', () => {
       }
     ]);
   });
+
+  test('handles nodes out of order', () => {
+    const tags = [tagSmall];
+    const newNodes = createNodesWithVariants(tags, [smallNode], [largeNode, smallNodeDiff]);
+
+    expect(newNodes).toEqual([
+      {
+        ...smallNode,
+        extensions: {
+          SHOPIFY_variant: [
+            {
+              tags,
+              mesh: smallNodeDiff.mesh,
+            }
+          ],
+        }
+      },
+      {
+        extensions: {
+          SHOPIFY_variant: [
+            {
+              tags,
+              ...largeNode,
+            }
+          ]
+        },
+      }
+    ]);
+  });
 });
