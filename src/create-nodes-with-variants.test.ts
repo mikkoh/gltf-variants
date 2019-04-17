@@ -66,7 +66,7 @@ describe('createNodesWithVariants', () => {
           SHOPIFY_variant: [
             {
               tags,
-              ...smallNode,
+              mesh: smallNode.mesh,
             }
           ],
         }
@@ -96,7 +96,7 @@ describe('createNodesWithVariants', () => {
           SHOPIFY_variant: [
             {
               tags,
-              ...largeNode,
+              mesh: largeNode.mesh,
             }
           ],
         }
@@ -186,7 +186,7 @@ describe('createNodesWithVariants', () => {
           SHOPIFY_variant: [
             {
               tags,
-              ...largeNode,
+              mesh: largeNode.mesh,
             }
           ]
         },
@@ -205,7 +205,7 @@ describe('createNodesWithVariants', () => {
           SHOPIFY_variant: [
             {
               tags: firstTags,
-              ...smallNode,
+              mesh: smallNode.mesh,
             }
           ],
         }
@@ -223,7 +223,7 @@ describe('createNodesWithVariants', () => {
           SHOPIFY_variant: [
             {
               tags: firstTags,
-              ...smallNode,
+              mesh: smallNode.mesh,
             },
             {
               tags: ['fancy'],

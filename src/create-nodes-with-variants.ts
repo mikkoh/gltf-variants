@@ -33,6 +33,9 @@ function createRightNode(tags: string[], rightNode: INode): INodeWithVariantExte
     ...rightNode,
   };
 
+  // delete it here because it's added to the newly created node
+  delete variant.name;
+
   return {
     name,
     extensions: {
