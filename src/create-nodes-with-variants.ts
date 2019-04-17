@@ -27,12 +27,14 @@ function createLeftNode(tags: string[], node: INode, change: Change): INodeWithV
 }
 
 function createRightNode(tags: string[], rightNode: INode): INodeWithVariantExtension {
+  const {name} = rightNode;
   const variant: ITaggedNode = {
     tags,
     ...rightNode,
   };
 
   return {
+    name,
     extensions: {
       SHOPIFY_variant: [
         variant,

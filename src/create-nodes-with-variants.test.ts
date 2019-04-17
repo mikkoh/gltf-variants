@@ -61,6 +61,7 @@ describe('createNodesWithVariants', () => {
 
     expect(newNodes).toEqual([
       {
+        name: smallNode.name,
         extensions: {
           SHOPIFY_variant: [
             {
@@ -90,6 +91,7 @@ describe('createNodesWithVariants', () => {
         }
       },
       {
+        name: largeNode.name,
         extensions: {
           SHOPIFY_variant: [
             {
@@ -179,6 +181,7 @@ describe('createNodesWithVariants', () => {
         }
       },
       {
+        name: largeNode.name,
         extensions: {
           SHOPIFY_variant: [
             {
@@ -188,6 +191,47 @@ describe('createNodesWithVariants', () => {
           ]
         },
       }
+    ]);
+  });
+
+  test('can add a right side variant and add onto it', () => {
+    const firstTags = [tagSmall];
+    const firstNodes = createNodesWithVariants(firstTags, [], [smallNode]);
+
+    expect(firstNodes).toEqual([
+      {
+        name: smallNode.name,
+        extensions: {
+          SHOPIFY_variant: [
+            {
+              tags: firstTags,
+              ...smallNode,
+            }
+          ],
+        }
+      },
+    ]);
+
+    const secondTags = ['fancy'];
+    const secondNodes = createNodesWithVariants(secondTags, firstNodes, [smallNodeDiff]);
+
+    expect(secondNodes).toHaveLength(1);
+    expect(secondNodes).toEqual([
+      {
+        name: smallNode.name,
+        extensions: {
+          SHOPIFY_variant: [
+            {
+              tags: firstTags,
+              ...smallNode,
+            },
+            {
+              tags: ['fancy'],
+              mesh: smallNodeDiff.mesh,
+            }
+          ],
+        }
+      },
     ]);
   });
 });
