@@ -1,21 +1,21 @@
-import { INode } from "babylonjs-gltf2interface";
+import { IChildRootProperty } from "babylonjs-gltf2interface";
 import diff from 'changeset';
 import clone from './clone';
-import findMatchingNode from './find-matching-node';
+import findMatchingNode from './find-matching-item';
 
 const {apply: applyDiffs} = diff;
 
 export enum ChangeType {
   /**
-   * Was a unique INode in left array but not in right
+   * Was a unique item in left array but not in right
    */
   IN_LEFT = 'IN_LEFT',
   /**
-   * Was a unique INode in right array but not in left
+   * Was a unique item in right array but not in left
    */
   IN_RIGHT = 'IN_RIGHT',
   /**
-   * INode existed in both but with changes
+   * item existed in both but with changes
    */
   DIFF = 'DIFF',
   /**
@@ -30,30 +30,30 @@ interface IChangeData {
 
 export type Change = {
   type: ChangeType,
-  node: INode,
+  item: IChildRootProperty,
 };
 
-function removeExtension(node: INode): INode {
+function removeExtension(item: IChildRootProperty): IChildRootProperty {
   return {
-    ...node,
+    ...item,
     extensions: undefined,
   };
 }
 
-export function getNodeChanges(left: INode[], right: INode[]): Change[] {
+export function getItemChanges(left: IChildRootProperty[], right: IChildRootProperty[]): Change[] {
   const changes: Change[] = [];
 
   left = clone(left).map(removeExtension);
   right = clone(right).map(removeExtension);
 
-  left.forEach((leftNode) => {
-    const result = findMatchingNode(leftNode, right);
+  left.forEach((leftItem) => {
+    const result = findMatchingNode(leftItem, right);
 
     // doesn't exist in right
     if (result === null) {
       changes.push({
         type: ChangeType.IN_LEFT,
-        node: leftNode,
+        item: leftItem,
       });
 
       return;
@@ -62,12 +62,12 @@ export function getNodeChanges(left: INode[], right: INode[]): Change[] {
     // remove from right since it was found
     right.splice(result.index, 1);
 
-    const diffs = diff(leftNode, result.match);
+    const diffs = diff(leftItem, result.match);
 
     if (diffs.length === 0) {
       changes.push({
         type: ChangeType.EQUAL,
-        node: leftNode,
+        item: leftItem,
       });
 
       return;
@@ -75,15 +75,15 @@ export function getNodeChanges(left: INode[], right: INode[]): Change[] {
 
     changes.push({
       type: ChangeType.DIFF,
-      node: applyDiffs(diffs, {}) as INode,
+      item: applyDiffs(diffs, {}) as IChildRootProperty,
     });
   });
 
   // now add in uniques in right
-  right.forEach((rightNode) => {
+  right.forEach((leftItem) => {
     changes.push({
       type: ChangeType.IN_RIGHT,
-      node: rightNode,
+      item: leftItem,
     });
   });
 

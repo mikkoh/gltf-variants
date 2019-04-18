@@ -1,8 +1,8 @@
 import {INode} from 'babylonjs-gltf2interface';
 
-import areSameNode from './are-same-node';
+import areSameItem from './are-same-item';
 
-describe('areSameNode', () => {
+describe('areSameItem', () => {
   const node1: INode = {
     name: 'node1',
   };
@@ -12,7 +12,7 @@ describe('areSameNode', () => {
   };
 
   test('can check that nodes are the same', () => {
-    expect(areSameNode(node1, node2)).toBe(false);
-    expect(areSameNode(node1, node1)).toBe(true);
+    expect(areSameItem(node1, node2)).toBe(false);
+    expect(areSameItem(node1, node1)).toBe(true);
   });
 });
