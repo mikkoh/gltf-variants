@@ -1,7 +1,7 @@
 import {IChildRootProperty} from 'babylonjs-gltf2interface';
 import clone from './clone';
 import IChildRootPropertyWithVariantExtension, {ITaggedChildRootProperty} from './inode-with-variant-extension';
-import {getNodeChanges, ChangeType, Change} from './get-node-changes';
+import {getItemChanges, ChangeType, Change} from './get-node-changes';
 import getVariantExtension from './get-variant-extension';
 import setVariantExtension from './set-variant-extension';
 import compactVariants from './compact-variants';
@@ -14,7 +14,7 @@ function createLeftNode(tags: string[], node: IChildRootProperty, change: Change
   if (change.type === ChangeType.DIFF) {
     variant = {
       tags,
-      ...change.node,
+      ...change.item,
     };
   }
 
@@ -48,7 +48,7 @@ function createRightNode(tags: string[], rightNode: IChildRootProperty): IChildR
 
 export default function createNodesWithVariants(tags: string[], leftNodes: IChildRootProperty[], rightNodes: IChildRootProperty[]): IChildRootPropertyWithVariantExtension[] {
   const nodes: IChildRootPropertyWithVariantExtension[] = [];
-  const changes = getNodeChanges(leftNodes, rightNodes);
+  const changes = getItemChanges(leftNodes, rightNodes);
 
   for (let i = 0; i < changes.length; i++) {
     const change = changes[i];
@@ -64,7 +64,7 @@ export default function createNodesWithVariants(tags: string[], leftNodes: IChil
     }
 
     nodes.push(
-      createRightNode(tags, change.node),
+      createRightNode(tags, change.item),
     );
   }
 
