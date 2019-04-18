@@ -1,5 +1,5 @@
 import compactVariants from './compact-variants';
-import {ITaggedChildRootProperty} from './inode-with-variant-extension';
+import {ITaggedChildRootProperty} from './i-child-root-property-variant-extension';
 
 describe('compactVariants', () => {
   const tag1 = 'tag1';

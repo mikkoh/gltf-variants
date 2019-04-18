@@ -1,4 +1,4 @@
-import IChildRootPropertyWithVariantExtension, {INodeExtension} from './inode-with-variant-extension';
+import IChildRootPropertyWithVariantExtension, {INodeExtension} from './i-child-root-property-variant-extension';
 import getExtensions from './get-variant-extension';
 import {INode} from 'babylonjs-gltf2interface';
 

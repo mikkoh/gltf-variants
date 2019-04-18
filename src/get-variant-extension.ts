@@ -1,5 +1,5 @@
 import { IChildRootProperty } from "babylonjs-gltf2interface";
-import { ITaggedChildRootProperty } from './inode-with-variant-extension';
+import { ITaggedChildRootProperty } from './i-child-root-property-variant-extension';
 
 export default function getVariantExtension(item: IChildRootProperty): ITaggedChildRootProperty[] {
   if (!item.extensions) {

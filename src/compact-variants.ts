@@ -1,4 +1,4 @@
-import {ITaggedChildRootProperty} from './inode-with-variant-extension';
+import {ITaggedChildRootProperty} from './i-child-root-property-variant-extension';
 import {IChildRootProperty} from 'babylonjs-gltf2interface';
 import diff from 'changeset';
 import clone from './clone';

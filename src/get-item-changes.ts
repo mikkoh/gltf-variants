@@ -1,7 +1,7 @@
 import { IChildRootProperty } from "babylonjs-gltf2interface";
 import diff from 'changeset';
 import clone from './clone';
-import findMatchingNode from './find-matching-node';
+import findMatchingNode from './find-matching-item';
 
 const {apply: applyDiffs} = diff;
 

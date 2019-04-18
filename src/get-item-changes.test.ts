@@ -1,5 +1,5 @@
 import {INode} from "babylonjs-gltf2interface";
-import {getItemChanges, ChangeType} from './get-node-changes';
+import {getItemChanges, ChangeType} from './get-item-changes';
 
 describe('getNodesChanges', () => {
   const node1: INode = {

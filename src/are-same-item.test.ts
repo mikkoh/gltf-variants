@@ -1,6 +1,6 @@
 import {INode} from 'babylonjs-gltf2interface';
 
-import areSameItem from './are-same-node';
+import areSameItem from './are-same-item';
 
 describe('areSameItem', () => {
   const node1: INode = {

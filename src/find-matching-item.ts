@@ -1,5 +1,5 @@
 import { IChildRootProperty } from "babylonjs-gltf2interface";
-import areSameItem from './are-same-node';
+import areSameItem from './are-same-item';
 
 type ItemMatch = {
   index: number,

@@ -1,6 +1,6 @@
 import { IChildRootProperty } from 'babylonjs-gltf2interface';
 
-import findMatchingItem from './find-matching-node';
+import findMatchingItem from './find-matching-item';
 
 describe('findMatchingItem', () => {
   const node1: IChildRootProperty = {

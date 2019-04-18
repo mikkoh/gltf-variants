@@ -1,6 +1,6 @@
 import setVariantExtension from './set-variant-extension';
 import { INode } from 'babylonjs-gltf2interface';
-import IChildRootPropertyWithVariantExtension, {ITaggedChildRootProperty} from './inode-with-variant-extension';
+import IChildRootPropertyWithVariantExtension, {ITaggedChildRootProperty} from './i-child-root-property-variant-extension';
 
 describe('setVariantExtension', () => {
   let node1: INode = {};

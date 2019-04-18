@@ -1,7 +1,7 @@
 import {IChildRootProperty} from 'babylonjs-gltf2interface';
 import clone from './clone';
-import IChildRootPropertyWithVariantExtension, {ITaggedChildRootProperty} from './inode-with-variant-extension';
-import {getItemChanges, ChangeType, Change} from './get-node-changes';
+import IChildRootPropertyWithVariantExtension, {ITaggedChildRootProperty} from './i-child-root-property-variant-extension';
+import {getItemChanges, ChangeType, Change} from './get-item-changes';
 import getVariantExtension from './get-variant-extension';
 import setVariantExtension from './set-variant-extension';
 import compactVariants from './compact-variants';

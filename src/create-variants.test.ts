@@ -1,6 +1,6 @@
 import {INode} from 'babylonjs-gltf2interface';
-import IChildRootPropertyWithVariantExtension from './inode-with-variant-extension';
-import createItemWithVariants from './create-nodes-with-variants';
+import IChildRootPropertyWithVariantExtension from './i-child-root-property-variant-extension';
+import createItemWithVariants from './create-variants';
 
 describe('createNodesWithVariants', () => {
   const nameSmall = 'smallNode';
