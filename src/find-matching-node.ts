@@ -1,5 +1,5 @@
 import { IChildRootProperty } from "babylonjs-gltf2interface";
-import areSameNode from './are-same-node';
+import areSameItem from './are-same-node';
 
 type ItemMatch = {
   index: number,
@@ -8,7 +8,7 @@ type ItemMatch = {
 
 export default function findMatchingItem(item: IChildRootProperty, itemList: IChildRootProperty[]): ItemMatch | null {
   const index = itemList.findIndex((value) => {
-    return areSameNode(item, value);
+    return areSameItem(item, value);
   });
   
   if (index === -1) {

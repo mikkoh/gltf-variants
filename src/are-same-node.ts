@@ -1,5 +1,5 @@
 import {IChildRootProperty} from 'babylonjs-gltf2interface';
 
-export default function areSameNode(nodeA: IChildRootProperty, nodeB: IChildRootProperty): boolean {
-  return nodeA.name === nodeB.name;
+export default function areSameItem(itemA: IChildRootProperty, itemB: IChildRootProperty): boolean {
+  return itemA.name === itemB.name;
 }
