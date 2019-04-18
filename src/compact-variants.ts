@@ -7,8 +7,8 @@ import compactTags from './compact-tags';
 export default function compactVariants(variants: ITaggedChildRootProperty[]): ITaggedChildRootProperty[] {
   variants = clone(variants);
 
-  const variantsNoTags: IChildRootProperty[] = variants.map((node) => {
-    const returnValue = clone(node);
+  const variantsNoTags: IChildRootProperty[] = variants.map((item) => {
+    const returnValue = clone(item);
     delete returnValue.tags;
     return returnValue;
   });
