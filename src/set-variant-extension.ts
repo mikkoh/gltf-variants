@@ -1,12 +1,12 @@
 import { IChildRootProperty } from "babylonjs-gltf2interface";
 import { ITaggedChildRootProperty } from './inode-with-variant-extension';
 
-export default function getVariantExtension(node: IChildRootProperty, variants: ITaggedChildRootProperty[]): ITaggedChildRootProperty[] {
-  if (!node.extensions) {
-    node.extensions = {};
+export default function getVariantExtension(item: IChildRootProperty, variants: ITaggedChildRootProperty[]): ITaggedChildRootProperty[] {
+  if (!item.extensions) {
+    item.extensions = {};
   }
 
-  node.extensions.SHOPIFY_variant = variants;
+  item.extensions.SHOPIFY_variant = variants;
 
-  return node.extensions.SHOPIFY_variant;
+  return item.extensions.SHOPIFY_variant;
 }
