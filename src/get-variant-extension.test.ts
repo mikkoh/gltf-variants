@@ -1,9 +1,9 @@
-import INodeWithVariantExtension, {INodeExtension} from './inode-with-variant-extension';
+import IChildRootPropertyWithVariantExtension, {INodeExtension} from './inode-with-variant-extension';
 import getExtensions from './get-variant-extension';
 import {INode} from 'babylonjs-gltf2interface';
 
 describe('getExtensions', () => {
-  let nodeWithExtensions: INodeWithVariantExtension;
+  let nodeWithExtensions: IChildRootPropertyWithVariantExtension;
   let nodeWithOutExtensions: INode;
 
   beforeEach(() => {

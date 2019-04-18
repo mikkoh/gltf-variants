@@ -1,4 +1,4 @@
-import { INode } from "babylonjs-gltf2interface";
+import { IChildRootProperty } from "babylonjs-gltf2interface";
 import diff from 'changeset';
 import clone from './clone';
 import findMatchingNode from './find-matching-node';
@@ -30,17 +30,17 @@ interface IChangeData {
 
 export type Change = {
   type: ChangeType,
-  node: INode,
+  node: IChildRootProperty,
 };
 
-function removeExtension(node: INode): INode {
+function removeExtension(node: IChildRootProperty): IChildRootProperty {
   return {
     ...node,
     extensions: undefined,
   };
 }
 
-export function getNodeChanges(left: INode[], right: INode[]): Change[] {
+export function getNodeChanges(left: IChildRootProperty[], right: IChildRootProperty[]): Change[] {
   const changes: Change[] = [];
 
   left = clone(left).map(removeExtension);
@@ -75,7 +75,7 @@ export function getNodeChanges(left: INode[], right: INode[]): Change[] {
 
     changes.push({
       type: ChangeType.DIFF,
-      node: applyDiffs(diffs, {}) as INode,
+      node: applyDiffs(diffs, {}) as IChildRootProperty,
     });
   });
 

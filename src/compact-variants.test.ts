@@ -1,18 +1,18 @@
 import compactVariants from './compact-variants';
-import {ITaggedNode} from './inode-with-variant-extension';
+import {ITaggedChildRootProperty} from './inode-with-variant-extension';
 
 describe('compactVariants', () => {
   const tag1 = 'tag1';
   const tag2 = 'tag2';
 
-  const variant1: ITaggedNode = {
+  const variant1: ITaggedChildRootProperty = {
     tags: [tag1],
   };
-  const variant2: ITaggedNode = {
+  const variant2: ITaggedChildRootProperty = {
     tags: [tag2],
     mesh: 0,
-  };
-  const variant3: ITaggedNode = {
+  } as ITaggedChildRootProperty;
+  const variant3: ITaggedChildRootProperty = {
     tags: [tag2],
   };
 

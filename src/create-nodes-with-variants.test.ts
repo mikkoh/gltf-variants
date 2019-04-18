@@ -1,5 +1,5 @@
 import {INode} from 'babylonjs-gltf2interface';
-import INodeWithVariantExtension from './inode-with-variant-extension';
+import IChildRootPropertyWithVariantExtension from './inode-with-variant-extension';
 import createNodesWithVariants from './create-nodes-with-variants';
 
 describe('createNodesWithVariants', () => {
@@ -10,7 +10,7 @@ describe('createNodesWithVariants', () => {
   let smallNode: INode;
   let smallNodeDiff: INode;
   let largeNode: INode;
-  let smallNodeWithVariants: INodeWithVariantExtension;
+  let smallNodeWithVariants: IChildRootPropertyWithVariantExtension;
 
   beforeEach(() => {
     smallNode = {

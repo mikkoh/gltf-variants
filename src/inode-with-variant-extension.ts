@@ -1,13 +1,13 @@
-import {INode} from 'babylonjs-gltf2interface';
+import {IChildRootProperty} from 'babylonjs-gltf2interface';
 
-export interface ITaggedNode extends INode {
-  tags: string[]
+export interface ITaggedChildRootProperty extends IChildRootProperty {
+  tags: string[],
 }
 
 export interface INodeExtension {
-  SHOPIFY_variant: ITaggedNode[]
+  SHOPIFY_variant: ITaggedChildRootProperty[]
 }
 
-export default interface INodeWithVariantExtension extends INode {
+export default interface IChildRootPropertyWithVariantExtension extends IChildRootProperty {
   extensions: INodeExtension;
 }

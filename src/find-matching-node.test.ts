@@ -1,15 +1,15 @@
-import { INode } from 'babylonjs-gltf2interface';
+import { IChildRootProperty } from 'babylonjs-gltf2interface';
 
 import findMatchingNode from './find-matching-node';
 
 describe('findMatchingNode', () => {
-  const node1: INode = {
+  const node1: IChildRootProperty = {
     name: 'node1',
   };
-  const node2: INode = {
+  const node2: IChildRootProperty = {
     name: 'node2',
   };
-  const node3: INode = {
+  const node3: IChildRootProperty = {
     name: 'node3',
   };
   const allNodes = [

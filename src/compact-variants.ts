@@ -1,21 +1,21 @@
-import {ITaggedNode} from './inode-with-variant-extension';
-import {INode} from 'babylonjs-gltf2interface';
+import {ITaggedChildRootProperty} from './inode-with-variant-extension';
+import {IChildRootProperty} from 'babylonjs-gltf2interface';
 import diff from 'changeset';
 import clone from './clone';
 import compactTags from './compact-tags';
 
-export default function compactVariants(variants: ITaggedNode[]): ITaggedNode[] {
+export default function compactVariants(variants: ITaggedChildRootProperty[]): ITaggedChildRootProperty[] {
   variants = clone(variants);
 
-  const variantsNoTags: INode[] = variants.map((node) => {
+  const variantsNoTags: IChildRootProperty[] = variants.map((node) => {
     const returnValue = clone(node);
     delete returnValue.tags;
     return returnValue;
   });
 
   for (let i = 0; i < variants.length; i++) {
-    const currentVariant: ITaggedNode = variants[i];
-    const currentVariantNoTag: INode = variantsNoTags[i];
+    const currentVariant: ITaggedChildRootProperty = variants[i];
+    const currentVariantNoTag: IChildRootProperty = variantsNoTags[i];
 
     for (let j = 0; j < variantsNoTags.length; j++) {
       if (i === j) {

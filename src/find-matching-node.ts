@@ -1,12 +1,12 @@
-import { INode } from "babylonjs-gltf2interface";
+import { IChildRootProperty } from "babylonjs-gltf2interface";
 import areSameNode from './are-same-node';
 
 type NodeMatch = {
   index: number,
-  match: INode,
+  match: IChildRootProperty,
 };
 
-export default function findNode(node: INode, list: INode[]): NodeMatch | null {
+export default function findNode(node: IChildRootProperty, list: IChildRootProperty[]): NodeMatch | null {
   const index = list.findIndex((value) => {
     return areSameNode(node, value);
   });

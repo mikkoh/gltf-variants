@@ -1,13 +1,13 @@
-import {INode} from 'babylonjs-gltf2interface';
+import {IChildRootProperty} from 'babylonjs-gltf2interface';
 import clone from './clone';
-import INodeWithVariantExtension, {ITaggedNode} from './inode-with-variant-extension';
+import IChildRootPropertyWithVariantExtension, {ITaggedChildRootProperty} from './inode-with-variant-extension';
 import {getNodeChanges, ChangeType, Change} from './get-node-changes';
 import getVariantExtension from './get-variant-extension';
 import setVariantExtension from './set-variant-extension';
 import compactVariants from './compact-variants';
 
-function createLeftNode(tags: string[], node: INode, change: Change): INodeWithVariantExtension {
-  let variant: ITaggedNode = {
+function createLeftNode(tags: string[], node: IChildRootProperty, change: Change): IChildRootPropertyWithVariantExtension {
+  let variant: ITaggedChildRootProperty = {
     tags,
   };
 
@@ -26,9 +26,9 @@ function createLeftNode(tags: string[], node: INode, change: Change): INodeWithV
   return newNode;
 }
 
-function createRightNode(tags: string[], rightNode: INode): INodeWithVariantExtension {
+function createRightNode(tags: string[], rightNode: IChildRootProperty): IChildRootPropertyWithVariantExtension {
   const {name} = rightNode;
-  const variant: ITaggedNode = {
+  const variant: ITaggedChildRootProperty = {
     tags,
     ...rightNode,
   };
@@ -46,8 +46,8 @@ function createRightNode(tags: string[], rightNode: INode): INodeWithVariantExte
   };
 }
 
-export default function createNodesWithVariants(tags: string[], leftNodes: INode[], rightNodes: INode[]): INodeWithVariantExtension[] {
-  const nodes: INodeWithVariantExtension[] = [];
+export default function createNodesWithVariants(tags: string[], leftNodes: IChildRootProperty[], rightNodes: IChildRootProperty[]): IChildRootPropertyWithVariantExtension[] {
+  const nodes: IChildRootPropertyWithVariantExtension[] = [];
   const changes = getNodeChanges(leftNodes, rightNodes);
 
   for (let i = 0; i < changes.length; i++) {
