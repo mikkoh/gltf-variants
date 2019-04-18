@@ -1,21 +1,21 @@
 import { IChildRootProperty } from "babylonjs-gltf2interface";
 import areSameNode from './are-same-node';
 
-type NodeMatch = {
+type ItemMatch = {
   index: number,
   match: IChildRootProperty,
 };
 
-export default function findNode(node: IChildRootProperty, list: IChildRootProperty[]): NodeMatch | null {
-  const index = list.findIndex((value) => {
-    return areSameNode(node, value);
+export default function findMatchingItem(item: IChildRootProperty, itemList: IChildRootProperty[]): ItemMatch | null {
+  const index = itemList.findIndex((value) => {
+    return areSameNode(item, value);
   });
   
   if (index === -1) {
     return null;
   }
 
-  const match = list[index];
+  const match = itemList[index];
 
   return {match, index};
 }

@@ -1,8 +1,8 @@
 import { IChildRootProperty } from 'babylonjs-gltf2interface';
 
-import findMatchingNode from './find-matching-node';
+import findMatchingItem from './find-matching-node';
 
-describe('findMatchingNode', () => {
+describe('findMatchingItem', () => {
   const node1: IChildRootProperty = {
     name: 'node1',
   };
@@ -23,13 +23,13 @@ describe('findMatchingNode', () => {
   ];
 
   test('finds node', () => {
-    expect(findMatchingNode(node2, allNodes)).toEqual({
+    expect(findMatchingItem(node2, allNodes)).toEqual({
       index: 1,
       match: node2,
     });
   });
 
   test('returnes null when not found', () => {
-    expect(findMatchingNode(node2, nodes1and3)).toEqual(null);
+    expect(findMatchingItem(node2, nodes1and3)).toEqual(null);
   });
 });
