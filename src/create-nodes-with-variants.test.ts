@@ -1,6 +1,6 @@
 import {INode} from 'babylonjs-gltf2interface';
 import IChildRootPropertyWithVariantExtension from './inode-with-variant-extension';
-import createNodesWithVariants from './create-nodes-with-variants';
+import createItemWithVariants from './create-nodes-with-variants';
 
 describe('createNodesWithVariants', () => {
   const nameSmall = 'smallNode';
@@ -39,7 +39,7 @@ describe('createNodesWithVariants', () => {
 
   test('handles tagging existing node', () => {
     const tags = [tagSmall];
-    const newNodes = createNodesWithVariants(tags, [smallNode], []);
+    const newNodes = createItemWithVariants(tags, [smallNode], []);
 
     expect(newNodes).toEqual([
       {
@@ -57,7 +57,7 @@ describe('createNodesWithVariants', () => {
 
   test('handles node addition', () => {
     const tags = [tagSmall];
-    const newNodes = createNodesWithVariants(tags, [], [smallNode]);
+    const newNodes = createItemWithVariants(tags, [], [smallNode]);
 
     expect(newNodes).toEqual([
       {
@@ -76,7 +76,7 @@ describe('createNodesWithVariants', () => {
 
   test('handles node addition when another node exists', () => {
     const tags = [tagSmall];
-    const newNodes = createNodesWithVariants(tags, [smallNode], [largeNode]);
+    const newNodes = createItemWithVariants(tags, [smallNode], [largeNode]);
 
     expect(newNodes).toHaveLength(2);
     expect(newNodes).toEqual([
@@ -106,7 +106,7 @@ describe('createNodesWithVariants', () => {
 
   test('handles variant diff when same node with changes', () => {
     const tags = [tagSmall];
-    const newNodes = createNodesWithVariants(tags, [smallNode], [smallNodeDiff]);
+    const newNodes = createItemWithVariants(tags, [smallNode], [smallNodeDiff]);
 
     expect(newNodes).toEqual([
       {
@@ -126,7 +126,7 @@ describe('createNodesWithVariants', () => {
   test('handles appending tags when same and has variants already', () => {
     const newTagName = 'another-tag';
     const tags = [newTagName];
-    const newNodes = createNodesWithVariants(tags, [smallNodeWithVariants], [smallNode]);
+    const newNodes = createItemWithVariants(tags, [smallNodeWithVariants], [smallNode]);
 
     expect(newNodes).toEqual([
       {
@@ -144,7 +144,7 @@ describe('createNodesWithVariants', () => {
 
   test('handles appending variant', () => {
     const tags = ['small', 'sleeveless'];
-    const newNodes = createNodesWithVariants(tags, [smallNodeWithVariants], [smallNodeDiff]);
+    const newNodes = createItemWithVariants(tags, [smallNodeWithVariants], [smallNodeDiff]);
 
     expect(newNodes).toEqual([
       {
@@ -166,7 +166,7 @@ describe('createNodesWithVariants', () => {
 
   test('handles nodes out of order', () => {
     const tags = [tagSmall];
-    const newNodes = createNodesWithVariants(tags, [smallNode], [largeNode, smallNodeDiff]);
+    const newNodes = createItemWithVariants(tags, [smallNode], [largeNode, smallNodeDiff]);
 
     expect(newNodes).toEqual([
       {
@@ -196,7 +196,7 @@ describe('createNodesWithVariants', () => {
 
   test('can add a right side variant and add onto it', () => {
     const firstTags = [tagSmall];
-    const firstNodes = createNodesWithVariants(firstTags, [], [smallNode]);
+    const firstNodes = createItemWithVariants(firstTags, [], [smallNode]);
 
     expect(firstNodes).toEqual([
       {
@@ -213,7 +213,7 @@ describe('createNodesWithVariants', () => {
     ]);
 
     const secondTags = ['fancy'];
-    const secondNodes = createNodesWithVariants(secondTags, firstNodes, [smallNodeDiff]);
+    const secondNodes = createItemWithVariants(secondTags, firstNodes, [smallNodeDiff]);
 
     expect(secondNodes).toHaveLength(1);
     expect(secondNodes).toEqual([

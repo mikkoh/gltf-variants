@@ -6,7 +6,7 @@ import getVariantExtension from './get-variant-extension';
 import setVariantExtension from './set-variant-extension';
 import compactVariants from './compact-variants';
 
-function createLeftNode(tags: string[], node: IChildRootProperty, change: Change): IChildRootPropertyWithVariantExtension {
+function createLeftItem(tags: string[], item: IChildRootProperty, change: Change): IChildRootPropertyWithVariantExtension {
   let variant: ITaggedChildRootProperty = {
     tags,
   };
@@ -18,22 +18,22 @@ function createLeftNode(tags: string[], node: IChildRootProperty, change: Change
     };
   }
 
-  const newNode = clone(node);
-  const variants = getVariantExtension(newNode);
+  const newItem = clone(item);
+  const variants = getVariantExtension(newItem);
 
   variants.push(variant);
 
-  return newNode;
+  return newItem;
 }
 
-function createRightNode(tags: string[], rightNode: IChildRootProperty): IChildRootPropertyWithVariantExtension {
-  const {name} = rightNode;
+function createRightItem(tags: string[], rightItem: IChildRootProperty): IChildRootPropertyWithVariantExtension {
+  const {name} = rightItem;
   const variant: ITaggedChildRootProperty = {
     tags,
-    ...rightNode,
+    ...rightItem,
   };
 
-  // delete it here because it's added to the newly created node
+  // delete it here because it's added to the newly created item
   delete variant.name;
 
   return {
@@ -46,33 +46,33 @@ function createRightNode(tags: string[], rightNode: IChildRootProperty): IChildR
   };
 }
 
-export default function createNodesWithVariants(tags: string[], leftNodes: IChildRootProperty[], rightNodes: IChildRootProperty[]): IChildRootPropertyWithVariantExtension[] {
-  const nodes: IChildRootPropertyWithVariantExtension[] = [];
-  const changes = getItemChanges(leftNodes, rightNodes);
+export default function createItemWithVariants(tags: string[], leftItems: IChildRootProperty[], rightItems: IChildRootProperty[]): IChildRootPropertyWithVariantExtension[] {
+  const items: IChildRootPropertyWithVariantExtension[] = [];
+  const changes = getItemChanges(leftItems, rightItems);
 
   for (let i = 0; i < changes.length; i++) {
     const change = changes[i];
 
-    if (i < leftNodes.length) {
-      const leftNode = leftNodes[i];
+    if (i < leftItems.length) {
+      const leftItem = leftItems[i];
 
-      nodes.push(
-        createLeftNode(tags, leftNode, change),
+      items.push(
+        createLeftItem(tags, leftItem, change),
       );
 
       continue;
     }
 
-    nodes.push(
-      createRightNode(tags, change.item),
+    items.push(
+      createRightItem(tags, change.item),
     );
   }
 
-  for (let i = 0; i < leftNodes.length; i++) {
-    const variants = getVariantExtension(nodes[i]);
+  for (let i = 0; i < leftItems.length; i++) {
+    const variants = getVariantExtension(items[i]);
     
-    setVariantExtension(nodes[i], compactVariants(variants));
+    setVariantExtension(items[i], compactVariants(variants));
   }
 
-  return nodes;
+  return items;
 }
