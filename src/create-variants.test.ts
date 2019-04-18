@@ -234,4 +234,16 @@ describe('createNodesWithVariants', () => {
       },
     ]);
   });
+
+  test('throws error when invalid left node', () => {
+    expect(() => {
+      createItemWithVariants(['tags'], [{}], [])
+    }).toThrow();
+  });
+
+  test('throws error when invalid right node', () => {
+    expect(() => {
+      createItemWithVariants(['tags'], [], [{}])
+    }).toThrow();
+  });
 });

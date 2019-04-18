@@ -5,6 +5,7 @@ import {getItemChanges, ChangeType, Change} from './get-item-changes';
 import getVariantExtension from './get-variant-extension';
 import setVariantExtension from './set-variant-extension';
 import compactVariants from './compact-variants';
+import validateItem from './validate-item';
 
 function createLeftItem(tags: string[], item: IChildRootProperty, change: Change): IChildRootPropertyWithVariantExtension {
   let variant: ITaggedChildRootProperty = {
@@ -46,7 +47,31 @@ function createRightItem(tags: string[], rightItem: IChildRootProperty): IChildR
   };
 }
 
+function validateItems(side: string, items: IChildRootProperty[]) {
+  const invalidWithMessage = items
+    .map((item) => {
+      const error = validateItem(item);
+
+      if (error) {
+        return {
+          item,
+          error,
+        };
+      }
+
+      return null;
+    })
+    .filter(Boolean);
+
+  if (invalidWithMessage.length > 0) {
+    throw new Error(`the following ${side} side items were invalid: ${JSON.stringify(invalidWithMessage, null, '  ')}`);
+  }
+}
+
 export default function createItemWithVariants(tags: string[], leftItems: IChildRootProperty[], rightItems: IChildRootProperty[]): IChildRootPropertyWithVariantExtension[] {
+  validateItems('left', leftItems);
+  validateItems('right', rightItems);
+
   const items: IChildRootPropertyWithVariantExtension[] = [];
   const changes = getItemChanges(leftItems, rightItems);
 
