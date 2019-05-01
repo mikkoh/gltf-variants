@@ -68,7 +68,7 @@ function validateItems(side: string, items: IChildRootProperty[]) {
   }
 }
 
-export default function createItemWithVariants(tags: string[], leftItems: IChildRootProperty[], rightItems: IChildRootProperty[]): IChildRootPropertyWithVariantExtension[] {
+export default function createVariantsOnItems(tags: string[], leftItems: IChildRootProperty[], rightItems: IChildRootProperty[]): IChildRootPropertyWithVariantExtension[] {
   validateItems('left', leftItems);
   validateItems('right', rightItems);
 
